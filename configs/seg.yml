@@ -1,0 +1,49 @@
+DATA_DIR: 'data/train_images'
+TRAIN_DF: 'data/train.csv'
+FOLD_DF: 'data/folds/5fold_0.csv'
+
+TRAIN_DIR: '_results/Unet_eff-b3_fold0_symmetric_shiftscale_smoothing1e-4'
+
+SAMPLER: ''
+LABEL_SMOOTHING: 0.0001
+ALBU: 2
+
+PARALLEL: False
+DEBUG: False
+PRINT_EVERY: 10
+
+TRAIN:
+  BATCH_SIZE: 16
+  NUM_WORKERS: 8
+  NUM_EPOCHS: 30
+
+EVAL:
+  BATCH_SIZE: 32
+  NUM_WORKERS: 8
+
+DATA:
+  IMG_H: 384
+  IMG_W: 576
+
+MODEL:
+  ARCHITECTURE: 'Unet'
+  ENCODER: 'efficientnet-b3'
+  CENTER: False
+
+LOSS:
+  NAME: 'bce'
+  FINETUNE_EPOCH: 5
+  FINETUNE_LOSS: 'binary_lovasz_loss_symmetric'
+
+OPTIMIZER:
+  NAME: 'radam'
+  LR: 0.001
+  # ENCODER_LR: 0.0001
+  # DECODER_LR: 0.001
+  PARAMS:
+
+SCHEDULER:
+  NAME: 'multi_step'
+  PARAMS:
+    milestones: [5,15]
+    gamma: 0.1
