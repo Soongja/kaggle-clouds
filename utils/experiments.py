@@ -1,3 +1,9 @@
+"""
+Reference:
+- https://github.com/khornlund/severstal-steel-defect-detection/blob/master/sever/model/loss.py
+"""
+
+
 class LabelSmoother:
     """
     Maps binary labels (0, 1) to (eps, 1 - eps)
